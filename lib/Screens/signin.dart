@@ -57,7 +57,7 @@ class _SigninState extends State<Signin> {
                           }
                           return null;
                         },
-                        keyboardType: TextInputType.name,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(hintText: "Username"),
                       ),
                       TextFormField(
