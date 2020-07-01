@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Authmethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -42,6 +43,23 @@ class Authmethods {
       return await _auth.signOut();
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  Future<FirebaseUser> loginwithgoogle() async {
+    try {
+      GoogleSignIn googlesignin = GoogleSignIn();
+      GoogleSignInAccount account = await googlesignin.signIn();
+      if (account == null) return null;
+      AuthResult result = await _auth.signInWithCredential(
+          GoogleAuthProvider.getCredential(
+              idToken: (await account.authentication).idToken,
+              accessToken: (await account.authentication).accessToken));
+      if (result.user == null) return null;
+      return result.user;
+    } catch (e) {
+      print("Error is: $e");
+      return null;
     }
   }
 }
