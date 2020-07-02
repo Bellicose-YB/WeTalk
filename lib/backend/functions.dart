@@ -17,4 +17,18 @@ class Functions {
     }
     return 'Email is not valid';
   }
+
+  String validatePassword(String value) {
+    if (value.isEmpty || value.length < 8) {
+      return 'Password must be greater than 8';
+    }
+    return null;
+  }
+
+  String validateUsername(String value) {
+    if (value.isEmpty || value.length < 5) {
+      return 'Enter Username greater than 5';
+    }
+    return null;
+  }
 }
